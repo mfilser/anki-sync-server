@@ -375,7 +375,8 @@ class SyncMediaHandler:
                 usn,
                 csum,
             ) in self.col.media.changes(lastUsn):
-                result.append([fname, usn, csum])
+                if csum is not None:
+                    result.append([fname, usn, csum])
         # anki assumes server_lastUsn == result[-1][1]
         # ref: anki/sync.py:720 (commit cca3fcb2418880d0430a5c5c2e6b81ba260065b7)
         result.reverse()
